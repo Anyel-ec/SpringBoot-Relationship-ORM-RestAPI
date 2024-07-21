@@ -25,6 +25,10 @@ public class DepartmentAppdService {
         return departmentAppdRepository.save(departmentAppd);
     }
 
+    public List<DepartmentAppd> saveDepartments(List<DepartmentAppd> departmentsAppd) {
+        return departmentAppdRepository.saveAll(departmentsAppd);
+    }
+
     public void deleteDepartment(Integer id) {
         departmentAppdRepository.deleteById(id);
     }

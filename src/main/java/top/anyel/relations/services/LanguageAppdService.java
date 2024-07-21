@@ -25,6 +25,10 @@ public class LanguageAppdService {
         return languageAppdRepository.save(languageAppd);
     }
 
+    public List<LanguageAppd> saveLanguages(List<LanguageAppd> languagesAppd) {
+        return languageAppdRepository.saveAll(languagesAppd);
+    }
+
     public void deleteLanguage(Integer id) {
         languageAppdRepository.deleteById(id);
     }

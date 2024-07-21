@@ -20,27 +20,27 @@ public class DepartmentLanguageAppdController {
         return departmentLanguageAppdService.getAllDepartmentLanguages();
     }
 
-    @GetMapping("/{departmentId}/{languageId}")
-    public ResponseEntity<DepartmentLanguageAppd> getDepartmentLanguageById(@PathVariable Integer departmentId, @PathVariable Integer languageId) {
-        DepartmentLanguageKeyAppd id = new DepartmentLanguageKeyAppd();
-        id.setDepartmentIdAppd(departmentId);
-        id.setLanguageIdAppd(languageId);
-        return departmentLanguageAppdService.getDepartmentLanguageById(id)
+    @GetMapping("/{departmentIdAppd}/{languageIdAppd}")
+    public ResponseEntity<DepartmentLanguageAppd> getDepartmentLanguageById(@PathVariable Integer departmentIdAppd, @PathVariable Integer languageIdAppd) {
+        DepartmentLanguageKeyAppd idAppd = new DepartmentLanguageKeyAppd(departmentIdAppd, languageIdAppd);
+        return departmentLanguageAppdService.getDepartmentLanguageById(idAppd)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public DepartmentLanguageAppd createDepartmentLanguage(@RequestBody DepartmentLanguageAppd departmentLanguageAppd) {
-        return departmentLanguageAppdService.saveDepartmentLanguage(departmentLanguageAppd);
+    public List<DepartmentLanguageAppd> createDepartmentLanguages(@RequestBody List<DepartmentLanguageAppd> departmentLanguagesAppd) {
+        for (DepartmentLanguageAppd dl : departmentLanguagesAppd) {
+            DepartmentLanguageKeyAppd idAppd = new DepartmentLanguageKeyAppd(dl.getDepartmentAppd().getDepartmentIdAppd(), dl.getLanguageAppd().getLanguageIdAppd());
+            dl.setIdAppd(idAppd);
+        }
+        return departmentLanguageAppdService.saveDepartmentLanguages(departmentLanguagesAppd);
     }
 
-    @PutMapping("/{departmentId}/{languageId}")
-    public ResponseEntity<DepartmentLanguageAppd> updateDepartmentLanguage(@PathVariable Integer departmentId, @PathVariable Integer languageId, @RequestBody DepartmentLanguageAppd departmentLanguageAppd) {
-        DepartmentLanguageKeyAppd id = new DepartmentLanguageKeyAppd();
-        id.setDepartmentIdAppd(departmentId);
-        id.setLanguageIdAppd(languageId);
-        return departmentLanguageAppdService.getDepartmentLanguageById(id)
+    @PutMapping("/{departmentIdAppd}/{languageIdAppd}")
+    public ResponseEntity<DepartmentLanguageAppd> updateDepartmentLanguage(@PathVariable Integer departmentIdAppd, @PathVariable Integer languageIdAppd, @RequestBody DepartmentLanguageAppd departmentLanguageAppd) {
+        DepartmentLanguageKeyAppd idAppd = new DepartmentLanguageKeyAppd(departmentIdAppd, languageIdAppd);
+        return departmentLanguageAppdService.getDepartmentLanguageById(idAppd)
                 .map(existingDepartmentLanguage -> {
                     departmentLanguageAppd.setIdAppd(existingDepartmentLanguage.getIdAppd());
                     return ResponseEntity.ok(departmentLanguageAppdService.saveDepartmentLanguage(departmentLanguageAppd));
@@ -48,12 +48,10 @@ public class DepartmentLanguageAppdController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{departmentId}/{languageId}")
-    public ResponseEntity<Void> deleteDepartmentLanguage(@PathVariable Integer departmentId, @PathVariable Integer languageId) {
-        DepartmentLanguageKeyAppd id = new DepartmentLanguageKeyAppd();
-        id.setDepartmentIdAppd(departmentId);
-        id.setLanguageIdAppd(languageId);
-        departmentLanguageAppdService.deleteDepartmentLanguage(id);
+    @DeleteMapping("/{departmentIdAppd}/{languageIdAppd}")
+    public ResponseEntity<Void> deleteDepartmentLanguage(@PathVariable Integer departmentIdAppd, @PathVariable Integer languageIdAppd) {
+        DepartmentLanguageKeyAppd idAppd = new DepartmentLanguageKeyAppd(departmentIdAppd, languageIdAppd);
+        departmentLanguageAppdService.deleteDepartmentLanguage(idAppd);
         return ResponseEntity.noContent().build();
     }
 }

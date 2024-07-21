@@ -2,6 +2,7 @@ package top.anyel.relations.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "employeesAppd")
@@ -13,9 +14,9 @@ public class EmployeeAppd {
 
     @ManyToOne
     @JoinColumn(name = "department_idAppd")
+    @JsonBackReference
     private DepartmentAppd departmentAppd;
 
     private String firstnameAppd;
     private String lastnameAppd;
-
 }

@@ -27,8 +27,8 @@ public class LanguageAppdController {
     }
 
     @PostMapping
-    public LanguageAppd createLanguage(@RequestBody LanguageAppd languageAppd) {
-        return languageAppdService.saveLanguage(languageAppd);
+    public List<LanguageAppd> createLanguages(@RequestBody List<LanguageAppd> languagesAppd) {
+        return languageAppdService.saveLanguages(languagesAppd);
     }
 
     @PutMapping("/{id}")

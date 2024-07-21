@@ -2,6 +2,8 @@ package top.anyel.relations.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.Date;
 import java.util.List;
 
@@ -19,10 +21,10 @@ public class DepartmentAppd {
 
     private Date dateAddedAppd;
 
-    @OneToMany(mappedBy = "departmentAppd")
+    @OneToMany(mappedBy = "departmentAppd", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<EmployeeAppd> employeesAppd;
 
-    @OneToMany(mappedBy = "departmentAppd")
+    @OneToMany(mappedBy = "departmentAppd", cascade = CascadeType.ALL)
     private List<DepartmentLanguageAppd> departmentLanguagesAppd;
-
 }

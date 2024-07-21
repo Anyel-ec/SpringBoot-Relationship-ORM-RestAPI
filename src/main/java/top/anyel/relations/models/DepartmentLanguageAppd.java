@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Data
 @Table(name = "departments_languagesAppd")
+@Data
 public class DepartmentLanguageAppd {
 
     @EmbeddedId
@@ -13,15 +13,17 @@ public class DepartmentLanguageAppd {
 
     @ManyToOne
     @MapsId("departmentIdAppd")
-    @JoinColumn(name = "department_idAppd", insertable = false, updatable = false)
+    @JoinColumn(name = "department_idAppd", nullable = false)
     private DepartmentAppd departmentAppd;
 
     @ManyToOne
     @MapsId("languageIdAppd")
-    @JoinColumn(name = "language_idAppd", insertable = false, updatable = false)
+    @JoinColumn(name = "language_idAppd", nullable = false)
     private LanguageAppd languageAppd;
 
+    @Column(name = "description_appd")
     private String descriptionAppd;
-    private String nameAppd;
 
+    @Column(name = "name_appd")
+    private String nameAppd;
 }

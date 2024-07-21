@@ -25,6 +25,10 @@ public class EmployeeAppdService {
         return employeeAppdRepository.save(employeeAppd);
     }
 
+    public List<EmployeeAppd> saveEmployees(List<EmployeeAppd> employeesAppd) {
+        return employeeAppdRepository.saveAll(employeesAppd);
+    }
+
     public void deleteEmployee(Integer id) {
         employeeAppdRepository.deleteById(id);
     }

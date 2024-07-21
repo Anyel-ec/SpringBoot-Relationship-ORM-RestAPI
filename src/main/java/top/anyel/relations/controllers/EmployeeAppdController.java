@@ -27,8 +27,8 @@ public class EmployeeAppdController {
     }
 
     @PostMapping
-    public EmployeeAppd createEmployee(@RequestBody EmployeeAppd employeeAppd) {
-        return employeeAppdService.saveEmployee(employeeAppd);
+    public List<EmployeeAppd> createEmployees(@RequestBody List<EmployeeAppd> employeesAppd) {
+        return employeeAppdService.saveEmployees(employeesAppd);
     }
 
     @PutMapping("/{id}")

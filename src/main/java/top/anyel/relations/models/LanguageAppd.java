@@ -18,5 +18,4 @@ public class LanguageAppd {
 
     @OneToMany(mappedBy = "languageAppd")
     private List<DepartmentLanguageAppd> departmentLanguagesAppd;
-
 }
